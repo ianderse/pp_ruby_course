@@ -1,7 +1,10 @@
 project1 = "ABC"
 project2 = "LMN"
 project3 = "XYZ"
+
 funding1 = 1000
+funding2 = 5000
+funding3 = 10000
 
 puts "Project #{project1} has $#{funding1} in funding"
 
