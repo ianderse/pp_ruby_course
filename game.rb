@@ -52,7 +52,7 @@ class Game
 
 		puts "\n#{title} High Scores:"
 		@players.sort.each do |player|
-			puts "#{player.name.ljust(20, '.')} #{player.score}"
+			puts high_score_entry(player)
 		end
 
 		@players.sort.each do |player|
@@ -66,5 +66,27 @@ class Game
 
 	def print_name_and_health(player)
 		puts "#{player.name} (#{player.health})"
+	end
+
+	def load_players(file_name)
+		File.readlines(file_name).each do |line|
+			name, health = line.split(',')
+			player = Player.new(name, Integer(health))
+			add_player(player)
+		end
+	end
+
+	def save_high_scores(file_name="high_scores.txt")
+		File.open(file_name, "w") do |file|
+			file.puts "#{@title} High Scores:"
+			@players.sort.each do |player|
+				file.puts high_score_entry(player)
+			end
+		end
+	end
+
+	def high_score_entry(player)
+		formatted_name = player.name.ljust(20, '.')
+		"#{formatted_name} #{player.score}"
 	end
 end
